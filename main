@@ -1,0 +1,26 @@
+import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
+
+object TopN_Sort extends App {
+
+  val data = ArrayBuffer.fill(20)(Random.between(-100, 100))
+
+//  println(data)
+
+  def topN_Sort(data: ArrayBuffer[Int], n: Int): ArrayBuffer[Int] = {
+    val acc = ArrayBuffer[Int]()
+    for (i <- 0 to n - 1)
+      acc += data(i)
+    println("First acc: ", acc)
+
+    for (i <- data.slice(n, data.length))
+      if (i < acc.max) {
+        acc -= acc.max
+        acc += i
+      }
+    acc
+  }
+
+  println(topN_Sort(data, 5))
+
+}
